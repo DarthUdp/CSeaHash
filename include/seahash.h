@@ -1,8 +1,25 @@
+/**
+ * BSD 3-Clause License
+ *
+ * Copyright (c) 2021, Matheus Xavier
+ * All rights reserved.
+ * Find the code at: https://github.com/DarthUdp/CSeaHash
+ */
+
 #ifndef SEAHASH_LIBRARY_H
 #define SEAHASH_LIBRARY_H
 
 #include <stddef.h>
 #include <stdint.h>
+
+/*
+ * Change these constants to define a different seed to use with seahash_hash_preseeded
+ */
+#define SEAHASH_PSEED_A 0x16f11fe89b0d677cUL
+#define SEAHASH_PSEED_B 0xb480a793d8e6c86cUL
+#define SEAHASH_PSEED_C 0x6fe2e5aaf078ebc9UL
+#define SEAHASH_PSEED_D 0x14f994a4c5259381UL
+
 
 struct seahash_state;
 

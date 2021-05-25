@@ -1,10 +1,11 @@
-# CAHash
-C implementation of the seahash non-cryptographic hash function.
+# CSeaHash
+C implementation of the seahash **non-cryptographic** general purpose hash function.
 
 # Disclaimer
-<h2>seahash is not a cryptographically secure hash, it's tuned for
-speed, not security, use a proper secure hashing algorithm for security
-critical applications!</h2>
+seahash is not a cryptographically secure hash and neither is CSeaHash, they are tuned for
+speed, not security!! __*Use a proper secure hashing algorithm for security
+critical applications!*__, some suggestions include: SHA-3 (Keccak), BLAKE2
+and if you absolutely can't use the previous two the SHA2 family.
 
 # TODO:
 - [x] hashes are repeatable
@@ -13,6 +14,13 @@ critical applications!</h2>
 - [ ] try to make results match reference
 - [ ] make the code more readable and organized
 - [ ] proper testing
+- [ ] tentatively support 32 bit targets
+
+# Features
+* Can be compiled without a libc and standalone
+* tiny footprint with good quality hashes and very good collision resistance±
+
+±[Disclaimer](#Disclaimer)
 
 # License
 BSD 3-Clause License

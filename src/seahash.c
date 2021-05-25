@@ -1,3 +1,11 @@
+/**
+ * BSD 3-Clause License
+ *
+ * Copyright (c) 2021, Matheus Xavier
+ * All rights reserved.
+ * Find the code at: https://github.com/DarthUdp/CSeaHash
+ */
+
 #include "../include/seahash.h"
 
 const uint64_t diffuse_const = 0x6eed0e9da4d94a4fULL;
@@ -130,10 +138,10 @@ void seahash_init_state(struct seahash_state *state, uint64_t a, uint64_t b, uin
 uint64_t seahash_hash_preseeded(char *buff, size_t buff_len)
 {
 	struct seahash_state state;
-	state.a = 0x16f11fe89b0d677cUL;
-	state.b = 0xb480a793d8e6c86cUL;
-	state.c = 0x6fe2e5aaf078ebc9UL;
-	state.d = 0x14f994a4c5259381UL;
+	state.a = SEAHASH_PSEED_A;
+	state.b = SEAHASH_PSEED_B;
+	state.c = SEAHASH_PSEED_C;
+	state.d = SEAHASH_PSEED_D;
 	state.written = 0;
 	return seahash_hash(&state, buff, buff_len);
 }
