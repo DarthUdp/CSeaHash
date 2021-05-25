@@ -9,7 +9,10 @@ if (TARGET32)
 endif ()
 
 include_directories(include)
-add_library(seahash SHARED src/seahash.c include/seahash.h)
-add_library(seahash-static src/seahash.c include/seahash.h)
+add_library(cseahash SHARED src/seahash.c include/seahash.h)
+add_library(cseahash-static src/seahash.c include/seahash.h)
+# Metal is intended for use in embedded/os level applications
+add_library(cseahash-metal src/seahash.c include/seahash.h)
 add_executable(test test/test.c)
-target_link_libraries(test seahash-static)
+target_compile_options(cseahash-metal PUBLIC -ffreestanding -nostdlib -static -mno-red-zone --target=elf-x86_64)
+target_link_libraries(test cseahash-static)

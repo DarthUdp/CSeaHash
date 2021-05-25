@@ -100,7 +100,13 @@ uint64_t read_uint64(const char *ptr)
 	#ifdef TARGET64BIT
 	return *(uint64_t *)ptr;
 	#else
-	#error src/seahash.c:read_uint64 lacking implementation for 32bit targets
+	/**
+	 * Beware of UB!
+	 * This makes assumptions about emulated 64 bits layout in an ideal
+	 * scenario you should change this code to read 8 bytes in le order
+	 * in your target archtecture.
+	 */
+	return *(uint64_t *)(uint32_t *)ptr | *(uint64_t *)(uint32_t *)ptr << 32;
 	#endif
 }
 

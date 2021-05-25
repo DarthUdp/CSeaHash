@@ -22,6 +22,15 @@ and if you absolutely can't use the previous two the SHA2 family.
 
 ±[Disclaimer](#Disclaimer)
 
+# Portability
+The code uses only compiler builtins and stddefs, and tries to
+make as few assumptions about platform features and layout 
+as possible see comments on [seahash.c](./src/seahash.c) 
+for information and what you might need to customize.
+I assume you know how to use clang to cross compile or
+have a custom gcc toolchain and can make changes to the
+cmake file.
+
 # License
 BSD 3-Clause License
 
