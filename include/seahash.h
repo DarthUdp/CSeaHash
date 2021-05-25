@@ -28,6 +28,24 @@ extern void seahash_pre_seed(struct seahash_state *state);
  * @return the hash in the form of a uint64_t
  */
 extern uint64_t seahash_hash_preseeded(char *buff, size_t buff_len);
+/**
+ * Hash using user provided seeds with state managed by the library code
+ * @param buff
+ * @param buff_len
+ * @param a seed param a
+ * @param b seed param b
+ * @param c seed param c
+ * @param d seed param d
+ * @return the hash resulting from using the provided seeds
+ */
+extern uint64_t seahash_hash_seeded(const char *buff, size_t buff_len, uint64_t a, uint64_t b, uint64_t c, uint64_t d);
+/**
+ * hash using a user provided state, beware that this makes the final hashes depend on this state
+ * @param state
+ * @param buff
+ * @param buff_len
+ * @return final hash
+ */
 extern uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff_len);
 
 #endif //SEAHASH_LIBRARY_H

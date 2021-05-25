@@ -29,7 +29,9 @@ void test_numbers()
 
 int main(int argc, char *argv[])
 {
-	test_all_words();
-	test_numbers();
+//	test_all_words();
+//	test_numbers();
+	char *str = "to be or not to be";
+	printf("%lu %lu\n", seahash_hash_preseeded(str, strlen(str)), strlen(str));
 	return 0;
 }

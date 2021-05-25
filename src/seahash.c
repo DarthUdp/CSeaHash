@@ -120,15 +120,6 @@ void seahash_init_state(struct seahash_state *state, uint64_t a, uint64_t b, uin
 	state->written = 0U;
 }
 
-void seahash_pre_seed(struct seahash_state *state)
-{
-	seahash_init_state(state,
-			   0x16f11fe89b0d677c,
-			   0xb480a793d8e6c86c,
-			   0x6fe2e5aaf078ebc9,
-			   0x14f994a4c5259381);
-}
-
 /**
  * Hash buff with preselected seeds, this is the simplest form possible to use
  * the library
@@ -139,14 +130,16 @@ void seahash_pre_seed(struct seahash_state *state)
 uint64_t seahash_hash_preseeded(char *buff, size_t buff_len)
 {
 	struct seahash_state state;
-	struct seahash_state *state_ptr = &state;
-	seahash_pre_seed(&state);
-	return seahash_hash(state_ptr, buff, buff_len);
+	state.a = 0x16f11fe89b0d677cUL;
+	state.b = 0xb480a793d8e6c86cUL;
+	state.c = 0x6fe2e5aaf078ebc9UL;
+	state.d = 0x14f994a4c5259381UL;
+	state.written = 0;
+	return seahash_hash(&state, buff, buff_len);
 }
-
 uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff_len)
 {
-	char chunk[8] = {0};
+	char chunk[8] = { 0 };
 //	uint64_t cvl;
 	uint64_t left = buff_len % 8;
 	if (left == 0) {
@@ -183,4 +176,14 @@ uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff
 		state->written += 8;
 	}
 	return finish(state, state->written);
+}
+uint64_t seahash_hash_seeded(const char *buff, size_t buff_len, uint64_t a, uint64_t b, uint64_t c, uint64_t d)
+{
+	struct seahash_state state;
+	state.a = a;
+	state.b = b;
+	state.c = c;
+	state.d = d;
+	state.written = 0;
+	return seahash_hash(&state, buff, buff_len);
 }
