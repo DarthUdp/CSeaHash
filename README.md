@@ -14,7 +14,7 @@ and if you absolutely can't use the previous two the SHA2 family.
 - [ ] try to make results match reference
 - [ ] make the code more readable and organized
 - [ ] proper testing
-- [ ] tentatively support 32 bit targets
+- [x] tentatively support 32 bit targets
 
 # Features
 * Can be compiled without a libc and standalone
