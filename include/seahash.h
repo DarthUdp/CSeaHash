@@ -16,11 +16,18 @@ struct seahash_state;
  */
 extern void seahash_init_state(struct seahash_state *state, uint64_t a, uint64_t b, uint64_t c, uint64_t d);
 /**
- * Hash a buffer
- * @param state
- * @param buff
- * @param buff_len
+ * Use preselected seeds for hashing, this is the recommended approach!
+ * @param state a state to initialize
  */
-extern void seahash_hash(struct seahash_state *state, char *buff, size_t buff_len);
+extern void seahash_pre_seed(struct seahash_state *state);
+/**
+ * Hash buff with preselected seeds, this is the simplest form possible to use
+ * the library
+ * @param buff the data to hash
+ * @param buff_len how long is the buffer
+ * @return the hash in the form of a uint64_t
+ */
+extern uint64_t seahash_hash_preseeded(char *buff, size_t buff_len);
+extern uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff_len);
 
 #endif //SEAHASH_LIBRARY_H

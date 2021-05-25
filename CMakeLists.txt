@@ -8,5 +8,8 @@ if (TARGET32)
     add_compile_definitions(TARGET64BIT)
 endif ()
 
+include_directories(include)
 add_library(seahash SHARED src/seahash.c include/seahash.h)
 add_library(seahash-static src/seahash.c include/seahash.h)
+add_executable(test test/test.c)
+target_link_libraries(test seahash-static)
