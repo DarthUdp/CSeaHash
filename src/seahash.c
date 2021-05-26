@@ -6,6 +6,7 @@
  * Find the code at: https://github.com/DarthUdp/CSeaHash
  */
 
+#include <stdio.h>
 #include "../include/seahash.h"
 
 const uint64_t diffuse_const = 0x6eed0e9da4d94a4fULL;
@@ -141,7 +142,7 @@ void seahash_init_state(struct seahash_state *state, uint64_t a, uint64_t b, uin
  * @param buff_len how long is the buffer
  * @return the hash in the form of a uint64_t
  */
-uint64_t seahash_hash_preseeded(char *buff, size_t buff_len)
+uint64_t seahash_hash_preseeded(const char *buff, size_t buff_len)
 {
 	struct seahash_state state;
 	state.a = SEAHASH_PSEED_A;
@@ -151,10 +152,21 @@ uint64_t seahash_hash_preseeded(char *buff, size_t buff_len)
 	state.written = 0;
 	return seahash_hash(&state, buff, buff_len);
 }
+
+uint64_t seahash_hash_seeded(const char *buff, size_t buff_len, uint64_t a, uint64_t b, uint64_t c, uint64_t d)
+{
+	struct seahash_state state;
+	state.a = a;
+	state.b = b;
+	state.c = c;
+	state.d = d;
+	state.written = 0;
+	return seahash_hash(&state, buff, buff_len);
+}
+
 uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff_len)
 {
 	char chunk[8] = { 0 };
-//	uint64_t cvl;
 	uint64_t left = buff_len % 8;
 	if (left == 0) {
 		for (size_t i = 0; i < buff_len; i += 8) {
@@ -190,14 +202,4 @@ uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff
 		state->written += 8;
 	}
 	return finish(state, state->written);
-}
-uint64_t seahash_hash_seeded(const char *buff, size_t buff_len, uint64_t a, uint64_t b, uint64_t c, uint64_t d)
-{
-	struct seahash_state state;
-	state.a = a;
-	state.b = b;
-	state.c = c;
-	state.d = d;
-	state.written = 0;
-	return seahash_hash(&state, buff, buff_len);
 }
