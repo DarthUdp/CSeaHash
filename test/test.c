@@ -1,3 +1,4 @@
+#include <ctest.h>
 #include <stdio.h>
 #include <seahash.h>
 #include <string.h>

@@ -11,17 +11,6 @@
 const uint64_t diffuse_const = 0x6eed0e9da4d94a4fULL;
 const uint64_t diffuse_inv_const = 0x2f72b4215a3d8cafULL;
 
-/**
- * Describes the state of the algorithm
- */
-struct seahash_state {
-    uint64_t a;
-    uint64_t b;
-    uint64_t c;
-    uint64_t d;
-    uint64_t written;
-};
-
 /*
  * Helper functions */
 
@@ -201,4 +190,13 @@ uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff
 		state->written += 8;
 	}
 	return finish(state, state->written);
+}
+
+void seahash_pre_seed(struct seahash_state *state)
+{
+	state->a = SEAHASH_PSEED_A;
+	state->b = SEAHASH_PSEED_B;
+	state->c = SEAHASH_PSEED_C;
+	state->d = SEAHASH_PSEED_D;
+	state->written = 0;
 }

@@ -21,7 +21,13 @@
 #define SEAHASH_PSEED_D 0x14f994a4c5259381UL
 
 
-struct seahash_state;
+struct seahash_state {
+    uint64_t a;
+    uint64_t b;
+    uint64_t c;
+    uint64_t d;
+    uint64_t written;
+};
 
 /**
  * Initialize state with the provided a, b, c, d parameters
