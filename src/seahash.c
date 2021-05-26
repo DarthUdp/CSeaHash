@@ -6,7 +6,6 @@
  * Find the code at: https://github.com/DarthUdp/CSeaHash
  */
 
-#include <stdio.h>
 #include "../include/seahash.h"
 
 const uint64_t diffuse_const = 0x6eed0e9da4d94a4fULL;
