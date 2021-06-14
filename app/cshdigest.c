@@ -7,9 +7,6 @@ uint64_t hash_file(const char *fname)
 	struct seahash_state state;
 	char buff[128] = { 0 };
 	uint64_t accum = 0;
-	uint64_t accum1 = 0;
-	uint64_t accum2 = 0;
-	uint64_t accum3 = 0;
 	FILE *fp = fopen(fname, "r");
 	if (fp == NULL)
 		return -1;
@@ -20,14 +17,10 @@ uint64_t hash_file(const char *fname)
 
 	for (size_t i = 0; i < sz; i += 128) {
 		fread(&buff, 32, 4, fp);
-		accum ^= seahash_hash(&state, buff, 32);
-		accum1 ^= seahash_hash(&state, &buff[31], 32);
-		accum2 ^= seahash_hash(&state, &buff[63], 32);
-		accum3 ^= seahash_hash(&state, &buff[95], 32);
-		accum3 ^= seahash_hash(&state, &buff[127], 32);
+		accum ^= seahash_hash(&state, buff, 128);
 	}
 	fclose(fp);
-	return accum ^ accum1 ^ accum2 ^ accum3;
+	return accum;
 }
 
 int main(int argc, char **argv)
