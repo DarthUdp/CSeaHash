@@ -20,7 +20,6 @@
 #define SEAHASH_PSEED_C 0x6fe2e5aaf078ebc9UL
 #define SEAHASH_PSEED_D 0x14f994a4c5259381UL
 
-
 struct seahash_state {
     uint64_t a;
     uint64_t b;
@@ -71,5 +70,14 @@ extern uint64_t seahash_hash_seeded(const char *buff, size_t buff_len, uint64_t 
  * @return final hash
  */
 extern uint64_t seahash_hash(struct seahash_state *state, const char *buff, size_t buff_len);
+
+/**
+ * hash using a user provided state and put the result as bytes in `dst`, dst must be 8 bytes long
+ * @param state
+ * @param dst
+ * @param buff
+ * @param buff_len
+ */
+extern void seahash_buff_return(struct seahash_state *state, uint8_t *dst, const char *buff, size_t buff_len);
 
 #endif //SEAHASH_LIBRARY_H

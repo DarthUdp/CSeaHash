@@ -200,3 +200,17 @@ void seahash_pre_seed(struct seahash_state *state)
 	state->d = SEAHASH_PSEED_D;
 	state->written = 0;
 }
+
+void seahash_buff_return(struct seahash_state *state, uint8_t *dst, const char *buff, size_t buff_len)
+{
+	uint64_t ret = 0;
+	ret = seahash_hash(state, buff, buff_len);
+	dst[0] = (ret >> 56) & 0xff;
+	dst[1] = (ret >> 48) & 0xff;
+	dst[2] = (ret >> 40) & 0xff;
+	dst[3] = (ret >> 32) & 0xff;
+	dst[4] = (ret >> 24) & 0xff;
+	dst[5] = (ret >> 16) & 0xff;
+	dst[6] = (ret >> 8) & 0xff;
+	dst[7] = ret & 0xff;
+}
