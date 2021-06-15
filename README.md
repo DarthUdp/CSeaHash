@@ -11,7 +11,6 @@ and if you absolutely can't use the previous two the SHA2 family.
 - [x] hashes are repeatable
 - [x] passes dumb collision test
 - [x] reasonably fast
-- [ ] try to make results match reference
 - [ ] make the code more readable and organized
 - [ ] proper testing
 - [x] tentatively support 32 bit targets
